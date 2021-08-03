@@ -8,6 +8,43 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    var body: some View {
+        Group {
+            Image(decorative: "ales-krivec-15949")
+                .accessibility(hidden: true)
+
+            VStack {
+                Text("Your score is")
+                Text("1000")
+                    .font(.title)
+            }
+            //.accessibilityElement(children: .combine)
+            .accessibilityElement(children: .ignore)
+            .accessibility(label: Text("Your score is 1000"))
+        }
+    }
+}
+
+struct ReadingControlValuesView: View {
+    @State private var estimate = 25.0
+    @State private var rating = 3
+
+    var body: some View {
+        VStack {
+            Slider(value: $estimate, in: 0 ... 50)
+                .padding()
+                .accessibility(value: Text("\(Int(estimate))"))
+
+            Stepper("Rate our service: \(rating)/5", value: $rating, in: 0 ... 5)
+                .padding()
+                .accessibility(value: Text("Rate our service: \(rating)/5"))
+        }
+    }
+
+}
+
+struct HintsAndTraitsView: View {
     let pictures = [
         "ales-krivec-15949",
         "galina-n-189483",
